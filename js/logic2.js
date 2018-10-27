@@ -5,12 +5,25 @@ var map = L.map("map", {
 });
 
 // Adding tile layer
-L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+var street = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
   attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
   maxZoom: 18,
   id: "mapbox.streets",
   accessToken: API_KEY
-}).addTo(map);
+});
+
+// var dark = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+//   attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+//   maxZoom: 18,
+//   id: "mapbox.dark",
+//   accessToken: API_KEY
+// });
+
+// // Only one base layer can be shown at a time
+// var baseMaps = {
+//   "Street Map": street,
+//   "Dark Map": dark
+// };
 
 // Add all the graffitiMarkers to a new layer group.
 // Now we can handle them as one group instead of referencing each individually
@@ -19,12 +32,14 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 
 // Overlays that may be toggled on or off
 var overlayMaps = {
-  DistrictMap: districtLayer
+  // Markers: graffitiMarkerLayer,
+  // HeatMap: graffitiHeatMapLayer,
+  "District Map": districtLayer
 };
 
 // Pass our map layers into our layer control
 // Add the layer control to the map
-var layerControl = L.control.layers(null, overlayMaps, {
+L.control.layers(overlayMaps, {
   collapsed: false
 }).addTo(map);
 
