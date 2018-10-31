@@ -85,7 +85,7 @@ var marker = L.marker(WriterzBlok.location).addTo(map);
 
 
 // Grabbing our GeoJSON data..
-var districtLayer = d3.json(districtlink, function(districtdata) {
+d3.json(districtlink, function(districtdata) {
 
   // Creating a geoJSON layer with the retrieved data
   L.geoJson(districtdata, {
