@@ -21,27 +21,26 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data/graffiti_table.sqlite"
 db = SQLAlchemy(app)
 
-# reflect an existing database into a new model
-Base = automap_base()
-# reflect the tables
-Base.prepare(db.engine, reflect=True)
-print('stuff')
-print(Base.classes)
-# Save references to each table
-Graffiti_table = Base.classes.graffiti_table
+# # reflect an existing database into a new model
+# Base = automap_base()
+# # reflect the tables
+# v = Base.prepare(db.engine, reflect=True)
+# print('stuff')
+# # Save references to each table
+# Graffiti_table = Base.classes
 
 
 @app.route("/")
 def index():
     """Return the homepage."""
-    return render_template("index2.html")
+    # return render_template("index2.html")
 
     # Use Pandas to perform the sql query
-    df = pd.read_sql_table(Graffiti_table)
+    df = pd.read_sql_table(table_name = "graffiti_table", con = "sqlite:///data/graffiti_table.sqlite")
     print(df)
 
     # Return a list of the column names (sample names)
-    return jsonify(df)
+    return df.to_json()
 
 
 # @app.route("/metadata/<sample>")
