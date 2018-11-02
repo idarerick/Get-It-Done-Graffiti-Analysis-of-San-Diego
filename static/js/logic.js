@@ -1,4 +1,4 @@
-var districtlink = "../council_districts_datasd.geojson";
+var districtlink = "/static/council_districts_datasd.geojson";
 
 // Function that will determine the color of a district based on the district it belongs to
 function chooseColor(district) {
@@ -41,18 +41,18 @@ var url = "/data";
 var heatArray = [];
   // var $sampleMetadata = document.getElementById("sample-metadata");
 d3.json(url, function(response) {
-console.log(response);
-var items = Object.entries(response);
-  for (var i=0; i<items.length; i++) {
-  var lat = response[i].lat;
-  var long = response[i].long;
-  console.log(lat);
-  console.log(long);
-    if (lat) {
-      heatArray.push([lat, long]);
-    }
+  console.log(response);
+
+  for (var i in response.lat) {
+      var lat = response.lat[i];
+      var long = response.long[i];
+      //console.log(lat);
+      //console.log(long);
+      if (lat) {
+        heatArray.push([lat, long]);
+      }
   }
-console.log(heatArray);
+  console.log(heatArray);
 });
 
 
@@ -84,8 +84,8 @@ var baseMaps = {
 };
 
 var heatmap = L.heatLayer(heatArray, {
-  radius: 25,
-  blur: 35
+  radius: 20,
+  blur: 30
 });
 
 // Overlays that may be toggled on or off
