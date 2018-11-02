@@ -18,8 +18,8 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data/graffiti_table.sqlite"
-db = SQLAlchemy(app)
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data/SDGraffiti3.sqlite"
+# db = SQLAlchemy(app)
 
 # # reflect an existing database into a new model
 # Base = automap_base()
@@ -32,11 +32,15 @@ db = SQLAlchemy(app)
 
 @app.route("/")
 def index():
+	render_template("index.html")
+
+@app.route("/data")
+def data():
     """Return the homepage."""
     # return render_template("index2.html")
 
     # Use Pandas to perform the sql query
-    df = pd.read_sql_table(table_name = "graffiti_table", con = "sqlite:///data/graffiti_table.sqlite")
+    df = pd.read_sql_table(table_name = "SDGraffiti3Table", con = "sqlite:///data/SDGraffiti3.sqlite")
     print(df)
 
     # Return a list of the column names (sample names)

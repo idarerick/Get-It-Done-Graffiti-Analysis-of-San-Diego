@@ -37,6 +37,26 @@ var districtLayer = L.geoJson([],{
   },
 });
 
+var url = "/data";
+var heatArray = [];
+  // var $sampleMetadata = document.getElementById("sample-metadata");
+d3.json(url, function(response) {
+console.log(response);
+var items = Object.entries(response);
+  for (var i=0; i<items.length; i++) {
+  var lat = response[i].lat;
+  var long = response[i].long;
+  console.log(lat);
+  console.log(long);
+    if (lat) {
+      heatArray.push([lat, long]);
+    }
+  }
+console.log(heatArray);
+});
+
+
+
 d3.json(districtlink, function(districtdata) {
   districtLayer.addData(districtdata.features)
 });
@@ -63,9 +83,15 @@ var baseMaps = {
   "Dark Map": darkmap
 };
 
+var heatmap = L.heatLayer(heatArray, {
+  radius: 25,
+  blur: 35
+});
+
 // Overlays that may be toggled on or off
 var overlayMaps = {
-  "District Map": districtLayer
+  "District Map": districtLayer,
+  "Heat Map": heatmap
 };
 
 // Creating map object
