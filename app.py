@@ -34,6 +34,10 @@ app = Flask(__name__)
 def index():
 	return render_template("index.html")
 
+# @app.route("/barpie")
+# def index():
+# 	return render_template("barpie.html")
+
 @app.route("/data")
 def data():
     """Return the homepage."""
