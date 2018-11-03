@@ -1,11 +1,8 @@
 
 
 
-// Called on each feature
-function onEachFeature(feature, layer) {
 
-// Set mouse events to change map styling
-layer.on({
+L.districtLayer.on({
 
   // When a user's mouse touches a map feature, the mouseover event calls this function, that feature's opacity changes to 90% so that it stands out
   mouseover: function(event) {
@@ -36,4 +33,8 @@ bindPopup(function(layer){
     "<h3>" + feature.properties.phone + "</h3> <hr>" + 
     "<h4>" + feature.properties.website + "</h4>");
 });
+
+// Called on each feature
+function onEachFeature(feature, layer) {
+
 },
