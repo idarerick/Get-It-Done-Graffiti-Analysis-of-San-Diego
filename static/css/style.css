@@ -1,10 +1,41 @@
+/* css for map */
 body {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #map,
+  body,
+  html {
+    height: 100%;
+  }
+
+  /* css for charts and html */
+.holderBox {
+    height: 50%;
+    width: 550px;
+    background-color: powderblue;
 }
 
-#map,
-body,
-html {
-  height: 100%;
+body {
+    background-color: black;
 }
+
+.mainParagraph {
+    overflow: auto;
+    font-size: 15px;
+    padding: 5px;
+}
+
+#smallPie {
+  width: 175px;
+  background-color: orange;
+  padding: 5px;
+}
+
+#pieLegend {
+  width: 200px;
+  background-color: red;
+}
+    
+
