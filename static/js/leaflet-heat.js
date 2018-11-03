@@ -8,7 +8,7 @@
 
   function t(i) {
     return this instanceof t ? (this._canvas = i = typeof i === "string" ? document.getElementById(i) : i, this._ctx = i.getContext("2d"), this._width = i.width, this._height = i.height, this._max = 1, void this.clear()) : new t(i);
-  }t.prototype = { defaultRadius: 25,
+  }t.prototype = { defaultRadius: 1,
     defaultGradient: { 0.4: "blue", 0.6: "cyan", 0.7: "lime", 0.8: "yellow", 1: "red" },
     data: function(t, i) {
       return this._data = t, this;
@@ -23,7 +23,7 @@
       return this._data = [], this;
     },
     radius: function(t, i) {
-      i = i || 15; var a = this._circle = document.createElement("canvas"),
+      i = i || 1; var a = this._circle = document.createElement("canvas"),
         s = a.getContext("2d"),
         e = this._r = t + i; return a.width = a.height = 2 * e, s.shadowOffsetX = s.shadowOffsetY = 200, s.shadowBlur = i, s.shadowColor = "black", s.beginPath(), s.arc(e - 200, e - 200, t, 0, 2 * Math.PI, !0), s.closePath(), s.fill(), this;
     },
