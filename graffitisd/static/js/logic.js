@@ -37,17 +37,12 @@ var districtLayer = L.geoJson([],{
   },
 });
 
-var url = "/data";
 var heatArray = [];
-  // var $sampleMetadata = document.getElementById("sample-metadata");
-d3.json(url, function(response) {
+d3.json("/data").then(function(response) {
   console.log(response);
-
   for (var i in response.lat) {
       var lat = response.lat[i];
       var long = response.long[i];
-      //console.log(lat);
-      //console.log(long);
       if (lat) {
         heatArray.push([lat, long]);
       }
@@ -57,7 +52,7 @@ d3.json(url, function(response) {
 
 
 
-d3.json(districtlink, function(districtdata) {
+d3.json("/static/council_districts_datasd.geojson").then(function(districtdata) {
   districtLayer.addData(districtdata.features)
 });
 
@@ -84,8 +79,8 @@ var baseMaps = {
 };
 
 var heatmap = L.heatLayer(heatArray, {
-  radius: 1,
-  blur: 50
+  radius: 25,
+  blur: 40
 });
 
 // Overlays that may be toggled on or off
@@ -105,4 +100,8 @@ var myMap = L.map("map", {
 // Add the layer control to the map
 var layerControl = L.control.layers(baseMaps, overlayMaps, {
   collapsed: false
+}).addTo(myMap);
+
+var marker = L.marker([32.710722, -117.086960], {
+  title: "Writerz Blok"
 }).addTo(myMap);

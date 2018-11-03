@@ -1,7 +1,3 @@
-
-
-
-
 L.districtLayer.on({
 
   // When a user's mouse touches a map feature, the mouseover event calls this function, that feature's opacity changes to 90% so that it stands out

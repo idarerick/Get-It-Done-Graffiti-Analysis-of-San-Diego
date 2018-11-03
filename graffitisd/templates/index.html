@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+        <title>SD Graffiti Analysis!</title>
+        
+    
+
+    <!-- link to chart.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    
+    <!--D3-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- leaflet-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+    crossorigin=""></script>
+
+    
+    
+    <!-- CSS-->
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+	</head>
+	<body>
+
+<div class="container-fluid bg-g text-center">
+    <div class="row">
+        <div class="col-sm-6 col-lg-6">
+            <div class="leaflet holderBox" id="mapid">
+                <h1 class="leafletTitle"></h1>
+
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+            <div class="words holderBox">
+                <h1 class="mainParagraph">Results Analysis</h1>
+                <p1> The <a href="https://data.sandiego.gov/datasets/gid-graffiti/" targer="_blank">graffiti data</a> used for this project came from <a href="https://data.sandiego.gov/" target="_blank">data.sandiego.gov</a>. The range of data begins at 5-20-16 and covers all reports until 10-20-18. This data outlines the formal requests made to the San Diego City for graffiti removal. This data does not account for all the graffiti that could be in the city but specifically graffiti removal requests. Therefore, we are assuming that the requests are accurate and representative of the total amount of graffiti found in San Diego during this date range. From this, we saw an opportunity to explore the relationship between graffiti reports across the San Diego County and a local education program called <a href="http://writerzblok.com/" target="_blank">Writerz Blok</a>. The data of was compiled using requests that were entered government-developed app called <a href="https://www.sandiego.gov/form/get-it-done-homepage" target="_blank">Get It Done</a>.
+                </p1>
+                <br>
+                <br>
+                <p2> The leaflet visual includes two layers: there is a district layer outlining the 9 districts in San Diego County, and there is a a heat map layer that displays the collection of graffiti reports over these past two years.
+                </p2>
+                <br>
+                <br>
+                <p3> A local government-sponsored education program called <a href="http://writerzblok.com/" target="_blank">Writerz Blok</a> was created as an alternative for young aspiring street artists to create and display their work legally. Writerz Blok is marked on the map and we can see that it is at the epicenter of one of the reported graffiti hotspots. However, upon closer inspection, Writerz Blok does seem to have somewhat of an impact on the volume of graffiti in the area. District 9, which contains the neighborhood of City Heights, has by far the highest number of graffiti removal requests at a huge 6,266 requests over the two-year span. Its neighbor to the west, District 3, has a total of 4335 requests. For comparison, the lowest 103 in District 5 and 162 in District 1. The number of requests made in District 4 (where Writerz Blok is located) at 2,519 requests are significantly lower than both its northern neighbors District 9 and District 3.
+                </p3>
+                <br>
+                <br>
+                <p4>Overall, it looks like most of the requests literally stretch along El Cajon Blvd and University Avenue. The graffiti is also limited within the boundaries of the 8 Freeway to the north, the 94 to the South, and the 5 to the West.</p4>
+                <br>
+                <br>
+                <p5> The bar map shows the average number of days for each district between when an incident of graffiti is reported, and when the city completes the cleanup. A key takeaway is that District 8 has both the highest average and one of the highest concentrations of reports. The three pie charts break down the completion time of each request per district; broken into increments of 0-5 days, 6-18 days, and 18 days and up. Something interesting to note is that there have been 321 reported incidences that where completed the same day they were reported, and the maximum number of days taken to complete a request is 646 in District 8. This chart shows the disparage number of reports made between Districts 8 and 4, which could acount for the higher average completion rate of District 8.
+                </p5>
+                <br>
+                <br>
+                <p6>Geographically, most of the reports in district 8 are far away from the rest of the city. That might explain the high number of requests not taken care of in a timely manner.</p6>          
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-g text-center">
+    <div class="row">
+        <!-- <div class="col-sm-6 col-lg-6">
+            <div class="chart holderBox">
+                <h1 class="barChartTitle">Bar Chart</h1>
+                <canvas id="myBarChart"></canvas>
+
+            </div>
+        </div> -->
+        <div class="col-sm-6 col-lg-6">
+            <div class="pie holderBox">
+                <div id="smallPie">
+<!--                     <h5>SELECT District:</h5>
+                    <select id="selDistrict" onchange="optionChanged(this.value)"></select> -->
+                </div>
+                <div id="smallPie"></div>
+                <div id="smallPie pieLegend"><canvas id="myPieChart"></canvas></div>
+                <h1 class="pieChart">Pie Chart....</h1>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+                <!-- map div -->
+                <div id="map"></div>
+    <!-- Leaflet heatmap plugin-->
+    <script type="text/javascript" src="/static/js/leaflet-heat.js"></script>
+    <!-- API key -->
+    <script type="text/javascript" src="/static/js/config.js"></script>
+    <!-- JS  -->
+    <script type="text/javascript" src="/static/js/logic.js"></script>
+    <script type="text/javascript" src="/static/js/appPie.js"></script>
+
+    <script type="text/javascript" src="/static/js/appBar.js"></script>    
+
+  </body>
+</html>
